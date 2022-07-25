@@ -9,7 +9,7 @@ networks:
 services:
   frontend:
     container_name: LoL-S-Tracker-prod
-    image: docker-nextjs-dev
+    image: docker-nextjs-dev-lol-s-tracker
     build:
       context: .
       dockerfile: Dockerfile
