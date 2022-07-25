@@ -31,12 +31,12 @@ function ChampList(props) {
     }, [marked, setMarked])
 
     return (
-        <ul style={{ width: "100vw" }} className="flex flex-wrap justify-between">
+        <ul className="flex flex-wrap justify-between">
             {Object.keys(champs).map((champKey) => {
                 const champ = champs[champKey]
 
                 return (
-                    <li key={champ.key}>
+                    <li key={champ.key} >
                         <img src={baseUrl + champ.image.full} className="grid rounded place-content-center" onClick={() => markAsPlayed(champ.key)} style={{ opacity: marked.includes(champ.key) ? "40%" : "100%" }} />
                         <div className="grid w-32 h-10 rounded place-content-center">{champ.name}</div>
                     </li>
