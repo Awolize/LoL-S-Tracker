@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'; // <--- import the hook
 function ChampList(props) {
     const [marked, setMarked] = useState([]);
     const [champs, setChamps] = useState(props.champs ?? []);
+    const baseUrl = "https://ddragon.leagueoflegends.com/cdn/12.13.1/img/champion/"
 
     useEffect(() => {
         setChamps(props.champs)
@@ -31,12 +32,17 @@ function ChampList(props) {
 
     return (
         <ul style={{ width: "100vw" }} className="flex flex-wrap justify-between">
-            {champs.map((champ) => (
-                <li key={champ.key}>
-                    <img src={champ.icon} className="grid rounded place-content-center" onClick={() => markAsPlayed(champ.key)} style={{ opacity: marked.includes(champ.key) ? "40%" : "100%" }} />
-                    <div className="grid w-32 h-10 rounded place-content-center">{champ.name}</div>
-                </li>
-            ))}
+            {Object.keys(champs).map((champKey) => {
+                const champ = champs[champKey]
+
+                return (
+                    <li key={champ.key}>
+                        <img src={baseUrl + champ.image.full} className="grid rounded place-content-center" onClick={() => markAsPlayed(champ.key)} style={{ opacity: marked.includes(champ.key) ? "40%" : "100%" }} />
+                        <div className="grid w-32 h-10 rounded place-content-center">{champ.name}</div>
+                    </li>
+                )
+            }
+            )}
         </ul>
     )
 }
