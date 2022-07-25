@@ -8,7 +8,7 @@ networks:
 
 services:
   frontend:
-    container_name: webkinz-frontend-prod
+    container_name: LoL-S-Tracker-prod
     image: docker-nextjs-dev
     build:
       context: .
