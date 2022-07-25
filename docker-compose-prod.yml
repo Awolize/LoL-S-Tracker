@@ -1,0 +1,27 @@
+version: '3.8'
+
+networks:
+  internal: null
+  proxy:
+    attachable: true
+    name: proxy
+
+services:
+  frontend:
+    container_name: webkinz-frontend-prod
+    image: docker-nextjs-dev
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    restart: unless-stopped
+    labels:
+      traefik.enable: true
+      traefik.docker.network: proxy
+      traefik.http.routers.lol.rule: Host(`lol.awot.dev`)
+      traefik.http.routers.lol.entrypoints: websecure
+      traefik.http.routers.lol.tls: true
+      com.centurylinklabs.watchtower.enable: false
+    networks:
+      - proxy
