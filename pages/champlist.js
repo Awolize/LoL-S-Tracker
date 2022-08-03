@@ -51,6 +51,7 @@ function ChampList(props) {
                             {/* Image doesnt work in production, only loads about 6 images and then times out on the rest, container restrictions (ram,etc)? */}
                             <Image
                                 src={baseUrl + champ.image.full}
+                                alt={baseUrl + champ.image.full}
                                 onClick={() => markAsPlayed(champ.key)}
                                 style={{ opacity: marked.includes(champ.key) ? '40%' : '100%' }}
                                 height={120}
