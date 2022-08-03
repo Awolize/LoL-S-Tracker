@@ -39,7 +39,7 @@ function ChampList(props) {
             <div className="text-2xl text-center leading-loose">
                 {marked.length} / {Object.keys(champs).length}
             </div>
-            <ul
+            <div
                 className="grid gap-2 justify-between"
                 style={{
                     gridTemplateColumns: 'repeat(auto-fill, 120px)',
@@ -47,7 +47,7 @@ function ChampList(props) {
             >
                 {champs.map((champ) => {
                     return (
-                        <li key={champ.key}>
+                        <div key={champ.key}>
                             {/* Image doesnt work in production, only loads about 6 images and then times out on the rest, container restrictions (ram,etc)? */}
                             <Image
                                 src={baseUrl + champ.image.full}
@@ -55,19 +55,20 @@ function ChampList(props) {
                                 style={{ opacity: marked.includes(champ.key) ? '40%' : '100%' }}
                                 height={120}
                                 width={120}
-                                loader={myLoader}
+                                // loader={myLoader}
                             />
                             <div className="text-center">{champ.name}</div>
-                        </li>
+                        </div>
                     )
                 })}
-            </ul>
+            </div>
         </>
     )
 }
 
 const myLoader = ({ src, width, quality }) => {
-    return src
+    return `${src}`
+    // &w=${width}&q=${quality}
     // return `https://example.com/${src}?w=${width}&q=${quality || 75}`
 }
 
