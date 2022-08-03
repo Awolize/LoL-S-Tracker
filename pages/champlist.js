@@ -55,6 +55,7 @@ function ChampList(props) {
                                 style={{ opacity: marked.includes(champ.key) ? '40%' : '100%' }}
                                 height={120}
                                 width={120}
+                                loader={myLoader}
                             />
                             <div className="text-center">{champ.name}</div>
                         </li>
@@ -63,6 +64,11 @@ function ChampList(props) {
             </ul>
         </>
     )
+}
+
+const myLoader = ({ src, width, quality }) => {
+    return src
+    // return `https://example.com/${src}?w=${width}&q=${quality || 75}`
 }
 
 export default ChampList
