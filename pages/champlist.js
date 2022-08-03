@@ -34,27 +34,32 @@ function ChampList(props) {
     }
 
     return (
-        <ul
-            className="grid gap-2 justify-between"
-            style={{
-                gridTemplateColumns: 'repeat(auto-fill, 120px)',
-            }}
-        >
-            {Object.keys(champs).map((champKey) => {
-                const champ = champs[champKey]
+        <>
+            <div className="text-2xl text-center leading-loose">
+                {marked.length} / {Object.keys(champs).length}
+            </div>
+            <ul
+                className="grid gap-2 justify-between"
+                style={{
+                    gridTemplateColumns: 'repeat(auto-fill, 120px)',
+                }}
+            >
+                {Object.keys(champs).map((champKey) => {
+                    const champ = champs[champKey]
 
-                return (
-                    <li key={champ.key}>
-                        <img
-                            src={baseUrl + champ.image.full}
-                            onClick={() => markAsPlayed(champ.key)}
-                            style={{ opacity: marked.includes(champ.key) ? '40%' : '100%' }}
-                        />
-                        <div className="grid w-30 h-8 place-content-center">{champ.name}</div>
-                    </li>
-                )
-            })}
-        </ul>
+                    return (
+                        <li key={champ.key}>
+                            <img
+                                src={baseUrl + champ.image.full}
+                                onClick={() => markAsPlayed(champ.key)}
+                                style={{ opacity: marked.includes(champ.key) ? '40%' : '100%' }}
+                            />
+                            <div className="grid w-30 h-8 place-content-center">{champ.name}</div>
+                        </li>
+                    )
+                })}
+            </ul>
+        </>
     )
 }
 
