@@ -4,7 +4,7 @@ const nextConfig = {
     swcMinify: true,
     output: 'standalone',
     images: {
-        domains: ['ddragon.leagueoflegends.com'],
+        domains: ['ddragon.leagueoflegends.com', 'lol.awot.dev'],
     },
 }
 
