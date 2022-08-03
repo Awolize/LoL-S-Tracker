@@ -48,7 +48,7 @@ function ChampList(props) {
                 {champs.map((champ) => {
                     return (
                         <li key={champ.key}>
-                            <Image
+                            <img
                                 src={baseUrl + champ.image.full}
                                 onClick={() => markAsPlayed(champ.key)}
                                 style={{ opacity: marked.includes(champ.key) ? '40%' : '100%' }}
