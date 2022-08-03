@@ -56,6 +56,7 @@ function ChampList(props) {
                                 style={{ opacity: marked.includes(champ.key) ? '40%' : '100%' }}
                                 height={120}
                                 width={120}
+                                priority
                             />
                             <div className="text-center">{champ.name}</div>
                         </li>
