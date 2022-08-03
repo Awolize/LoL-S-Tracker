@@ -36,9 +36,9 @@ function ChampList(props) {
 
     return (
         <>
-            <div className="text-2xl text-center leading-loose">
+            <header className="text-2xl text-center leading-loose">
                 {marked.length} / {Object.keys(champs).length}
-            </div>
+            </header>
             <ul
                 className="grid gap-2 justify-between"
                 style={{
@@ -48,7 +48,8 @@ function ChampList(props) {
                 {champs.map((champ) => {
                     return (
                         <li key={champ.key}>
-                            <img
+                            {/* Image doesnt work in production, only loads about 6 images and then times out on the rest, container restrictions (ram,etc)? */}
+                            <Image
                                 src={baseUrl + champ.image.full}
                                 onClick={() => markAsPlayed(champ.key)}
                                 style={{ opacity: marked.includes(champ.key) ? '40%' : '100%' }}

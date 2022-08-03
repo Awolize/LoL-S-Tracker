@@ -8,8 +8,8 @@ networks:
 
 services:
   frontend:
-    container_name: LoL-S-Tracker-prod
-    image: docker-nextjs-prod-lol-s-tracker
+    container_name: LoL-S-Tracker-prod-dev
+    image: docker-nextjs-prod-dev-lol-s-tracker
     build:
       context: .
       dockerfile: Dockerfile
@@ -17,9 +17,9 @@ services:
     labels:
       traefik.enable: true
       traefik.docker.network: proxy
-      traefik.http.routers.lol.rule: Host(`lol.awot.dev`)
-      traefik.http.routers.lol.entrypoints: websecure
-      traefik.http.routers.lol.tls: true
+      traefik.http.routers.lol-dev.rule: Host(`lol-dev.awot.dev`)
+      traefik.http.routers.lol-dev.entrypoints: websecure
+      traefik.http.routers.lol-dev.tls: true
       com.centurylinklabs.watchtower.enable: false
     networks:
       - proxy
