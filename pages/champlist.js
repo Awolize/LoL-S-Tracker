@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react' // <--- import the hook
+import Image from 'next/image'
 
 function ChampList(props) {
     const [marked, setMarked] = useState([])
@@ -44,17 +45,17 @@ function ChampList(props) {
                     gridTemplateColumns: 'repeat(auto-fill, 120px)',
                 }}
             >
-                {Object.keys(champs).map((champKey) => {
-                    const champ = champs[champKey]
-
+                {champs.map((champ) => {
                     return (
                         <li key={champ.key}>
-                            <img
+                            <Image
                                 src={baseUrl + champ.image.full}
                                 onClick={() => markAsPlayed(champ.key)}
                                 style={{ opacity: marked.includes(champ.key) ? '40%' : '100%' }}
+                                height={120}
+                                width={120}
                             />
-                            <div className="grid w-30 h-8 place-content-center">{champ.name}</div>
+                            <div className="text-center">{champ.name}</div>
                         </li>
                     )
                 })}
