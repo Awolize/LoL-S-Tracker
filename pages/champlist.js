@@ -4,7 +4,7 @@ import Image from 'next/image'
 function ChampList(props) {
     const [marked, setMarked] = useState([])
     const [champs, setChamps] = useState(props.champs ?? [])
-    const baseUrl = 'https://ddragon.leagueoflegends.com/cdn/12.13.1/img/champion/'
+    const baseUrl = 'https://ddragon.leagueoflegends.com/cdn/12.21.1/img/champion/'
 
     useEffect(() => {
         setChamps(props.champs)
