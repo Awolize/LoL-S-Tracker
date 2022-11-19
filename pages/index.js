@@ -1,6 +1,6 @@
 //pages/index.js
 import Head from 'next/head'
-import ChampList from './champlist.js'
+import ChampList from '../components/champlist.js'
 export default function Home(props) {
     return (
         <div>
