@@ -7,24 +7,23 @@ function ChampList(props) {
     const baseUrl = 'https://ddragon.leagueoflegends.com/cdn/12.21.1/img/champion/'
 
     useEffect(() => {
-        let champsFilteredByRole = {}
+        let champsFilteredByRole = {
+            Top: [],
+            Jungle: [],
+            Mid: [],
+            Bottom: [],
+            Support: [],
+        }
 
         for (const champIndex in props.champs) {
             if (Object.hasOwnProperty.call(props.champs, champIndex)) {
                 const champ = props.champs[champIndex]
-
-                // create list if it doesnt exist yet
-                console.log(champsFilteredByRole[champ.role])
-                if (champsFilteredByRole[champ.role] == null) {
-                    champsFilteredByRole[champ.role] = []
-                }
 
                 champsFilteredByRole[champ.role].push(champ)
             }
         }
 
         setFilteredChamps(champsFilteredByRole)
-        console.log(champsFilteredByRole)
 
         console.log('Loading:', localStorage.getItem('lol-marked'))
         if (JSON.parse(localStorage.getItem('lol-marked'))) {
@@ -59,11 +58,10 @@ function ChampList(props) {
             </header>
 
             <div className="flex flex-row gap-2">
-                {['Top', 'Jungle', 'Mid', 'Bottom', 'Support'].map((role, index) => {
-                    console.log(index, role)
-
+                {/* Could prop be removed, added as default state */}
+                {['Top', 'Jungle', 'Mid', 'Bottom', 'Support'].map((role) => {
                     return (
-                        <div className="w-full p-4">
+                        <div className="w-full p-4" key={role}>
                             <h4 className="text-2xl p-2 text-center">{role}</h4>
                             <ul
                                 className="grid justify-between"
@@ -72,8 +70,6 @@ function ChampList(props) {
                                 }}
                             >
                                 {filteredChamps[role]?.map((champ) => {
-                                    console.log(champ)
-
                                     return (
                                         <li className="flex flex-col pb-2" key={champ.key}>
                                             {/* Image doesnt work in production, only loads about 6 images and then times out on the rest, container restrictions (ram,etc)? */}
