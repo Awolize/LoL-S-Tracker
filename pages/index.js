@@ -25,16 +25,23 @@ export async function getStaticProps() {
     // Call an external API endpoint to get posts
     const filePath = path.join(process.cwd(), 'champions.json')
     const dataJson = await fsPromises.readFile(filePath)
-    let data = JSON.parse(dataJson)
+    let data = JSON.parse(dataJson).data
+
+
+    const rolesFile = path.join(process.cwd(), 'roles.json')
+    const rolesJson = await fsPromises.readFile(rolesFile)
+    const rolesMap = JSON.parse(rolesJson)
 
     // Only send the necessary data to the client.
     // console.log('Complete data:', data['Aatrox'])
     data = Object.keys(data).map((key) => {
+        // console.log(key);
         const champ = {}
         champ.id = data[key].id
         champ.key = data[key].key
         champ.name = data[key].name
         champ.image = data[key].image
+        champ.role = rolesMap[key]
         return champ
     })
     // console.log('Kept data:', data[0])
