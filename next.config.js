@@ -6,12 +6,6 @@ const nextConfig = {
     images: {
         domains: ['ddragon.leagueoflegends.com', 'lol.awot.dev', 'lol-dev.awot.dev'],
     },
-
-    experimental: {
-        images: {
-            unoptimized: true,
-        },
-    },
 }
 
 module.exports = nextConfig
