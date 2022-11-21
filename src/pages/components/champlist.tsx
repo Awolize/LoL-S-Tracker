@@ -109,7 +109,7 @@ function ChampList(props) {
                         src={`${baseUrl}${champ.image.full}`}
                         alt={champ.name}
                         onClick={() => markAsPlayed(champ.key)}
-                        style={{ opacity: marked.includes(champ.key) ? "40%" : "100%" }}
+                        style={{ opacity: marked.includes(champ.key) ? "20%" : "100%" }}
                         height={120}
                         width={120}
                       />
