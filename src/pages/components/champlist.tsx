@@ -26,8 +26,16 @@ function ChampList(props) {
     setFilteredChamps(champsFilteredByRole);
 
     console.log("Loading:", localStorage.getItem("lol-marked"));
-    if (JSON.parse(localStorage.getItem("lol-marked") ?? "")) {
-      setMarked([...JSON.parse(localStorage.getItem("lol-marked") ?? "")]);
+
+    if (localStorage.getItem("lol-marked") != null) {
+      try {
+        const storageData = localStorage.getItem("lol-marked");
+        if (storageData != null) {
+          setMarked([...JSON.parse(storageData)]);
+        }
+      } catch (error) {
+        localStorage.removeItem("lol-marked");
+      }
     }
   }, [props.champs]);
 
@@ -54,7 +62,7 @@ function ChampList(props) {
   return (
     <>
       <header className="mt-2 flex  flex-row justify-center gap-2 text-center leading-loose">
-        <div className="rounded-xl bg-gradient-to-r from-[#6EE7B7] via-[#3B82F6] to-[#9333EA] p-[3px]">
+        <div className="rounded-xl bg-gradient-to-r from-green-500 via-blue-500 to-purple-500 p-[3px]">
           <div className="flex h-full flex-col justify-between rounded-lg bg-black  px-4 py-2 text-white ">
             <p className="text-2xl">
               {marked.length} / {Object.keys(props?.champs ?? {}).length}
@@ -80,7 +88,11 @@ function ChampList(props) {
                 <h4 className="my-auto p-2  ">
                   {markedSize} / {size}
                 </h4>
-                <h4 className="p-2 text-2xl">{role}</h4>
+                <div className="mb-2 bg-gradient-to-r from-green-600 via-blue-600 to-purple-600 pb-[3px]">
+                  <div className="flex h-full flex-col justify-between bg-black text-gray-200 ">
+                    <h4 className="text-xl font-bold">{role}</h4>
+                  </div>
+                </div>
                 <h4 className="my-auto p-2 ">{percentage.toFixed(1)}%</h4>
               </div>
               <ul
