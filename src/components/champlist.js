@@ -67,11 +67,10 @@ function ChampList(props) {
       <div className="flex flex-row gap-2">
         {/* Could prop be removed, added as default state */}
         {Object.keys(filteredChamps)?.map((role) => {
-          console.log(role);
-
           const size = filteredChamps[role].length;
           const markedSize = filteredChamps[role].filter((champ) => marked.includes(champ.key)).length;
           const percentage = (100 * markedSize) / size;
+
           return (
             <div className="w-full p-4" key={role}>
               <div className="flex flex-row justify-center text-md align-bottom gap-8 ">
@@ -98,7 +97,6 @@ function ChampList(props) {
                         style={{ opacity: marked.includes(champ.key) ? "40%" : "100%" }}
                         height={120}
                         width={120}
-                        priority
                       />
                       <div className="text-center text-xs">{champ.name}</div>
                     </li>
