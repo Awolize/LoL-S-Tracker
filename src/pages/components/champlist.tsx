@@ -62,7 +62,7 @@ function ChampList(props) {
   return (
     <>
       <header className="mt-2 flex  flex-row justify-center gap-2 text-center leading-loose">
-        <div className="rounded-xl bg-gradient-to-r from-green-500 via-blue-500 to-purple-500 p-[3px]">
+        <div className="rounded-xl bg-gradient-to-r from-green-500 via-sky-500 to-purple-500 p-[3px]">
           <div className="flex h-full flex-col justify-between rounded-lg bg-black  px-4 py-2 text-white ">
             <p className="text-2xl">
               {marked.length} / {Object.keys(props?.champs ?? {}).length}
@@ -88,7 +88,7 @@ function ChampList(props) {
                 <h4 className="my-auto p-2  ">
                   {markedSize} / {size}
                 </h4>
-                <div className="mb-2 bg-gradient-to-r from-green-600 via-blue-600 to-purple-600 pb-[3px]">
+                <div className="mb-2 bg-gradient-to-r from-green-600 via-sky-600 to-purple-600 pb-[3px]">
                   <div className="flex h-full flex-col justify-between bg-black text-gray-200 ">
                     <h4 className="text-xl font-bold">{role}</h4>
                   </div>
