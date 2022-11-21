@@ -22,12 +22,16 @@
         "noImplicitAny": false
     },
     "include": [
-        "next-env.d.ts",
-        "**/*.ts",
-        "**/*.tsx",
-        "**/*.cjs",
-        "**/*.mjs"
+        "src/**/*"
     ],
+    // "include": [
+    //     "next-env.d.ts",
+    //     "**/*.js",
+    //     "**/*.ts",
+    //     "**/*.tsx",
+    //     "**/*.cjs",
+    //     "**/*.mjs"
+    // ],
     "exclude": [
         "node_modules"
     ]
