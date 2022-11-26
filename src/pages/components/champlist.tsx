@@ -3,7 +3,13 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 
 function ChampList(props) {
   const [marked, setMarked] = useState([] as any);
-  const [filteredChamps, setFilteredChamps] = useState({});
+  const [filteredChamps, setFilteredChamps] = useState({
+    Top: [],
+    Jungle: [],
+    Mid: [],
+    Bottom: [],
+    Support: [],
+  });
   const baseUrl = "https://ddragon.leagueoflegends.com/cdn/12.21.1/img/champion/";
 
   useEffect(() => {
@@ -59,6 +65,58 @@ function ChampList(props) {
     });
   };
 
+  const champToImage = (champ: any) => {
+    return (
+      <li className="flex flex-col pb-2" key={champ.key}>
+        {/* Image doesnt work in production, only loads about 6 images and then times out on the rest, container restrictions (ram,etc)? */}
+
+        <LazyLoadImage
+          src={`${baseUrl}${champ.image.full}`}
+          alt={champ.name}
+          onClick={() => markAsPlayed(champ.key)}
+          style={{
+            opacity: marked.includes(champ.key) ? "40%" : "100%",
+          }}
+          className={marked.includes(champ.key) ? "grayscale" : "grayscale-0"}
+          height={100}
+          width={100}
+        />
+
+        <div className="text-center text-xs">{champ.name}</div>
+      </li>
+    );
+  };
+
+  const LoadByRole = (role) => {
+    const size: number = filteredChamps[role].length;
+    const markedSize: number = filteredChamps[role].filter((champ) => marked.includes(champ.key)).length;
+    const percentage = (100 * markedSize) / size;
+
+    return (
+      <div className="w-full p-4" key={role}>
+        <div className="text-md flex flex-row justify-center gap-8 align-bottom ">
+          <h4 className="my-auto p-2  ">
+            {markedSize} / {size}
+          </h4>
+          <div className="mb-2 bg-gradient-to-r from-green-600 via-sky-600 to-purple-600 pb-[3px]">
+            <div className="flex h-full flex-col justify-between bg-black text-gray-200 ">
+              <h4 className="text-xl font-bold">{role}</h4>
+            </div>
+          </div>
+          <h4 className="my-auto p-2 ">{percentage.toFixed(1)}%</h4>
+        </div>
+        <ul
+          className="grid justify-between"
+          style={{
+            gridTemplateColumns: "repeat(auto-fill, 90px)",
+          }}
+        >
+          {filteredChamps[role]?.map((champ: any) => champToImage(champ))}
+        </ul>
+      </div>
+    );
+  };
+
   return (
     <>
       <header className="mt-2 flex  flex-row justify-center gap-2 text-center leading-loose">
@@ -67,60 +125,14 @@ function ChampList(props) {
             <p className="text-2xl">
               {marked.length} / {Object.keys(props?.champs ?? {}).length}
             </p>
-            <p className="text-sm ">
-              {" "}
-              {((100 * marked.length) / Object.keys(props?.champs ?? {}).length).toFixed(2)}%{" "}
-            </p>
+            <p className="text-sm">{((100 * marked.length) / Object.keys(props?.champs ?? {}).length).toFixed(2)}% </p>
           </div>
         </div>
       </header>
 
       <div className="flex flex-row gap-2">
         {/* Could prop be removed, added as default state */}
-        {Object.keys(filteredChamps)?.map((role) => {
-          const size = filteredChamps[role].length;
-          const markedSize = filteredChamps[role].filter((champ) => marked.includes(champ.key)).length;
-          const percentage = (100 * markedSize) / size;
-
-          return (
-            <div className="w-full p-4" key={role}>
-              <div className="text-md flex flex-row justify-center gap-8 align-bottom ">
-                <h4 className="my-auto p-2  ">
-                  {markedSize} / {size}
-                </h4>
-                <div className="mb-2 bg-gradient-to-r from-green-600 via-sky-600 to-purple-600 pb-[3px]">
-                  <div className="flex h-full flex-col justify-between bg-black text-gray-200 ">
-                    <h4 className="text-xl font-bold">{role}</h4>
-                  </div>
-                </div>
-                <h4 className="my-auto p-2 ">{percentage.toFixed(1)}%</h4>
-              </div>
-              <ul
-                className="grid justify-between"
-                style={{
-                  gridTemplateColumns: "repeat(auto-fill, 90px)",
-                }}
-              >
-                {filteredChamps[role]?.map((champ) => {
-                  return (
-                    <li className="flex flex-col pb-2" key={champ.key}>
-                      {/* Image doesnt work in production, only loads about 6 images and then times out on the rest, container restrictions (ram,etc)? */}
-                      <LazyLoadImage
-                        src={`${baseUrl}${champ.image.full}`}
-                        alt={champ.name}
-                        onClick={() => markAsPlayed(champ.key)}
-                        style={{ opacity: marked.includes(champ.key) ? "20%" : "100%" }}
-                        height={120}
-                        width={120}
-                      />
-                      <div className="text-center text-xs">{champ.name}</div>
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-          );
-        })}
+        {Object.keys(filteredChamps)?.map((role) => LoadByRole(role))}
       </div>
     </>
   );
